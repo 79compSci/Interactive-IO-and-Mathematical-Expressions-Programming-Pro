@@ -1,30 +1,37 @@
 #include <iostream>
+#include <cmath>  // For pow() function
 using namespace std;
 
 int main() {
-    // Ingredients for 48 cookies
-    const double sugar_per_48 = 1.5;   // cups of sugar
-    const double butter_per_48 = 1.0;  // cups of butter
-    const double flour_per_48 = 2.75;  // cups of flour
+    // Variables to hold user input
+    double principal, interest_rate, balance;
+    int times_compounded;
 
-    // Ask user how many cookies they want to make
-    int desired_cookies;
-    cout << "How many cookies would you like to make? ";
-    cin >> desired_cookies;
+    // Get the initial investment (principal)
+    cout << "Enter the initial principal: $";
+    cin >> principal;
 
-    // Calculate the scaling factor
-    double scaling_factor = static_cast<double>(desired_cookies) / 48;
+    // Get the annual interest rate as a percentage
+    cout << "Enter the annual interest rate (as %): ";
+    cin >> interest_rate;
 
-    // Adjust the ingredient amounts
-    double required_sugar = sugar_per_48 * scaling_factor;
-    double required_butter = butter_per_48 * scaling_factor;
-    double required_flour = flour_per_48 * scaling_factor;
+    // Get the number of times the interest is compounded per year
+    cout << "Enter the number of times interest is compounded annually: ";
+    cin >> times_compounded;
 
-    // Display the required ingredient amounts
-    cout << "To make " << desired_cookies << " cookies, you will need:\n";
-    cout << required_sugar << " cups of sugar\n";
-    cout << required_butter << " cups of butter\n";
-    cout << required_flour << " cups of flour\n";
+    // Convert interest rate from percentage to decimal
+    double rate_decimal = interest_rate / 100.0;
+
+    // Calculate the balance after one year
+    balance = principal * pow(1 + (rate_decimal / times_compounded), times_compounded);
+
+    // Display the report
+    cout << "\nInterest Report:\n";
+    cout << "----------------------------------\n";
+    cout << "Initial Investment: $" << principal << endl;
+    cout << "Annual Interest Rate: " << interest_rate << "%" << endl;
+    cout << "Times Compounded: " << times_compounded << endl;
+    cout << "Balance after one year: $" << balance << endl;
 
     return 0;
 }
